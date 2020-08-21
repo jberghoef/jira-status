@@ -44,7 +44,7 @@ const ProjectItem: React.FC<{ project: Project }> = ({ project }) => {
             <Flex justify="space-between">
                 <Flex align="center">
                     <Box rounded="md" w={10} h={10} overflow="hidden">
-                        <Image src={project.avatarUrls["24x24"]} alt={project.name} />
+                        <Image w={10} h={10} src={project.avatarUrls["48x48"]} alt={project.name} />
                     </Box>
                     <Flex ml={3} direction="column">
                         <Text fontWeight="semibold" letterSpacing="wide" fontSize="xs">
@@ -56,7 +56,7 @@ const ProjectItem: React.FC<{ project: Project }> = ({ project }) => {
                 <Avatar
                     size="sm"
                     name={project.lead.displayName}
-                    src={project.lead.avatarUrls["32x32"]}
+                    src={project.lead.avatarUrls["48x48"]}
                 />
             </Flex>
             {project.versions && <VersionList versions={project.versions} />}
