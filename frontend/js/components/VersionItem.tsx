@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Badge, Heading, Text, Progress } from "@chakra-ui/core";
+import { Badge, Heading, Text, Progress, Stack } from "@chakra-ui/core";
 import axios from "axios";
 
 import { TableRow, TableCell } from "./Table";
@@ -53,12 +53,12 @@ const ProjectItem: React.FC<{ version: Version }> = ({ version }) => {
             </TableCell>
             {version.releaseDate && (
                 <TableCell>
-                    <Text fontSize="sm">
-                        {dayjs(version.releaseDate).format("D-M-YYYY")}
-                        <Text display="inline" ml={1} color="gray.500">
+                    <Stack isInline align="center">
+                        <Text fontSize="sm">{dayjs(version.releaseDate).format("D-M-YYYY")}</Text>
+                        <Text fontSize="xs" fontWeight="bold" color="gray.500">
                             {dayjs(version.releaseDate).fromNow()}
                         </Text>
-                    </Text>
+                    </Stack>
                 </TableCell>
             )}
         </TableRow>

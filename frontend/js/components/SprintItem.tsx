@@ -79,12 +79,14 @@ const SprintItem: React.FC<{ sprint: Sprint }> = ({ sprint }) => {
         const endDate = dayjs(sprint.endDate);
         if (sprint.startDate && sprint.endDate) {
             return (
-                <Text fontSize="sm">
-                    {startDate.format("D-M-YYYY")} - {endDate.format("D-M-YYYY")}
-                    <Text display="inline" ml={1} color="gray.500">
+                <Stack isInline align="center">
+                    <Text fontSize="sm">
+                        {startDate.format("D-M-YYYY")} - {endDate.format("D-M-YYYY")}
+                    </Text>
+                    <Text fontSize="xs" fontWeight="bold" color="gray.500">
                         {endDate.from(startDate, true)}
                     </Text>
-                </Text>
+                </Stack>
             );
         }
         return null;
@@ -94,22 +96,22 @@ const SprintItem: React.FC<{ sprint: Sprint }> = ({ sprint }) => {
         if (sprint.completeDate) {
             const completeDate = dayjs(sprint.completeDate);
             return (
-                <Text fontSize="sm">
-                    {completeDate.format("D-M-YYYY")}
-                    <Text display="inline" ml={1} color="gray.500">
+                <Stack isInline align="center">
+                    <Text fontSize="sm">{completeDate.format("D-M-YYYY")}</Text>
+                    <Text fontSize="xs" fontWeight="bold" color="gray.500">
                         {completeDate.fromNow()}
                     </Text>
-                </Text>
+                </Stack>
             );
         } else if (sprint.endDate) {
             const endDate = dayjs(sprint.endDate);
             return (
-                <Text fontSize="sm">
-                    {endDate.format("D-M-YYYY")}
-                    <Text display="inline" ml={1} color="gray.500">
+                <Stack isInline align="center">
+                    <Text fontSize="sm">{endDate.format("D-M-YYYY")}</Text>
+                    <Text fontSize="xs" fontWeight="bold" color="gray.500">
                         {endDate.fromNow()}
                     </Text>
-                </Text>
+                </Stack>
             );
         }
         return null;
