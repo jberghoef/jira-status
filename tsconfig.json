@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./frontend",
+    "rootDir": "./frontend",
+    "jsx": "react",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "pretty": true,
+    "paths": {
+      "~src/*": ["./*"]
+    },
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "target": "es2018",
+    "noImplicitAny": true,
+    "typeRoots": [
+      "frontend/js",
+      "node_modules/@types"
+    ]
+  },
+  "exclude": ["node_modules"]
+}

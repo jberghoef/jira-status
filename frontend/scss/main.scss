@@ -1,0 +1,19 @@
+@import "~normalize.css";
+
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 0 15px;
+}
+
+@import "./variables.scss";
+
+@import "./App.scss";
