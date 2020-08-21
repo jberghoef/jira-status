@@ -15,7 +15,8 @@ const SprintList: React.FC<{ sprints: Sprint[] }> = ({ sprints }) => (
                     <TableHeaderCell>Status</TableHeaderCell>
                     <TableHeaderCell>Issues</TableHeaderCell>
                     <TableHeaderCell>Assignees</TableHeaderCell>
-                    <TableHeaderCell>Date</TableHeaderCell>
+                    <TableHeaderCell>Date range</TableHeaderCell>
+                    <TableHeaderCell>Completion date</TableHeaderCell>
                 </TableRow>
             </TableHeader>
             <TableBody>

@@ -54,8 +54,10 @@ const ProjectItem: React.FC<{ version: Version }> = ({ version }) => {
             {version.releaseDate && (
                 <TableCell>
                     <Text fontSize="sm">
-                        {dayjs(version.releaseDate).fromNow()} (
-                        {dayjs(version.releaseDate).format("D-M-YYYY")})
+                        {dayjs(version.releaseDate).format("D-M-YYYY")}
+                        <Text display="inline" ml={1} color="gray.500">
+                            {dayjs(version.releaseDate).fromNow()}
+                        </Text>
                     </Text>
                 </TableCell>
             )}

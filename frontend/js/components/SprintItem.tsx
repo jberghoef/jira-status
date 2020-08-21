@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Badge, Heading, Text, Avatar, Stack, Tag, AvatarGroup } from "@chakra-ui/core";
+import { Badge, Heading, Text, Avatar, Stack, Tag, AvatarGroup, Tab } from "@chakra-ui/core";
 import axios from "axios";
 
 import { TableRow, TableCell } from "./Table";
@@ -74,14 +74,41 @@ const SprintItem: React.FC<{ sprint: Sprint }> = ({ sprint }) => {
         }, 0);
     };
 
-    const DateDisplay = () => {
-        if (sprint.completeDate) {
-            return <Text fontSize="sm">{dayjs(sprint.completeDate).format("D-M-YYYY")}</Text>;
-        } else if (sprint.startDate && sprint.endDate) {
+    const DateRangeDisplay = () => {
+        const startDate = dayjs(sprint.startDate);
+        const endDate = dayjs(sprint.endDate);
+        if (sprint.startDate && sprint.endDate) {
             return (
                 <Text fontSize="sm">
-                    {dayjs(sprint.startDate).format("D-M-YYYY")} -{" "}
-                    {dayjs(sprint.endDate).format("D-M-YYYY")}
+                    {startDate.format("D-M-YYYY")} - {endDate.format("D-M-YYYY")}
+                    <Text display="inline" ml={1} color="gray.500">
+                        {endDate.from(startDate, true)}
+                    </Text>
+                </Text>
+            );
+        }
+        return null;
+    };
+
+    const CompleteDateDisplay = () => {
+        if (sprint.completeDate) {
+            const completeDate = dayjs(sprint.completeDate);
+            return (
+                <Text fontSize="sm">
+                    {completeDate.format("D-M-YYYY")}
+                    <Text display="inline" ml={1} color="gray.500">
+                        {completeDate.fromNow()}
+                    </Text>
+                </Text>
+            );
+        } else if (sprint.endDate) {
+            const endDate = dayjs(sprint.endDate);
+            return (
+                <Text fontSize="sm">
+                    {endDate.format("D-M-YYYY")}
+                    <Text display="inline" ml={1} color="gray.500">
+                        {endDate.fromNow()}
+                    </Text>
                 </Text>
             );
         }
@@ -125,7 +152,10 @@ const SprintItem: React.FC<{ sprint: Sprint }> = ({ sprint }) => {
                 </AvatarGroup>
             </TableCell>
             <TableCell>
-                <DateDisplay />
+                <DateRangeDisplay />
+            </TableCell>
+            <TableCell>
+                <CompleteDateDisplay />
             </TableCell>
         </TableRow>
     );
