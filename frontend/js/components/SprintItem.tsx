@@ -27,12 +27,15 @@ const issueStatuses = [
 ];
 
 const SprintItem: React.FC<{ sprint: Sprint }> = ({ sprint }) => {
+    const [intervalID, setIntervalID] = useState<NodeJS.Timeout>();
     const [issues, setIssues] = useState<Issue[]>([]);
     const [assignees, setAssignees] = useState<{ [id: string]: Assignee }>({});
 
     useEffect(() => getIssues(), []);
     useEffect(() => {
-        setInterval(() => getIssues(), 1000 * 60);
+        const id = setInterval(() => getIssues(), 1000 * 60);
+        setIntervalID(id);
+        return () => clearInterval(intervalID);
     }, []);
 
     const getIssues = () => {

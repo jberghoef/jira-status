@@ -8,12 +8,16 @@ import type { Project } from "../projects";
 import type { Board } from "../boards";
 
 const ProjectItem: React.FC<{ project: Project }> = ({ project }) => {
+    const [boardIntervalID, setBoardIntervalID] = useState<NodeJS.Timeout>();
+    const [sprintIntervalID, setSprintIntervalID] = useState<NodeJS.Timeout>();
     const [boards, setBoards] = useState<Board[]>([]);
     const [sprints, setSprints] = useState<any[]>([]);
 
     useEffect(() => getBoards(), []);
     useEffect(() => {
-        setInterval(() => getBoards(), 1000 * 60);
+        const id = setInterval(() => getBoards(), 1000 * 60);
+        setBoardIntervalID(id);
+        return () => clearInterval(boardIntervalID);
     }, []);
 
     const getBoards = () => {
@@ -30,7 +34,9 @@ const ProjectItem: React.FC<{ project: Project }> = ({ project }) => {
         getSprints();
     }, [boards]);
     useEffect(() => {
-        setInterval(() => getSprints(), 1000 * 60);
+        const id = setInterval(() => getSprints(), 1000 * 60);
+        setSprintIntervalID(id);
+        return () => clearInterval(sprintIntervalID);
     }, [boards]);
 
     const getSprints = async () => {
@@ -38,6 +44,8 @@ const ProjectItem: React.FC<{ project: Project }> = ({ project }) => {
             boards.map((board) => axios.get(`/api/sprints/${board.id}`))
         ).then((responses) => responses.map((response) => setSprints(response.data.results)));
     };
+
+    console.log(project.name, boards);
 
     return (
         <Box p={5} mb={3} shadow="md" borderWidth="1px" rounded="md">

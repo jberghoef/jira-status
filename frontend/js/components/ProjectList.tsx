@@ -7,11 +7,14 @@ import ProjectItem from "./ProjectItem";
 import type { Project } from "../projects";
 
 const ProjectList: React.FC<{ keys: string[] }> = ({ keys }) => {
+    const [intervalID, setIntervalID] = useState<NodeJS.Timeout>();
     const [projects, setProjects] = useState<Project[]>([]);
 
     useEffect(() => getProjects(keys), []);
     useEffect(() => {
-        setInterval(() => getProjects(keys), 1000 * 60);
+        const id = setInterval(() => getProjects(keys), 1000 * 60);
+        setIntervalID(id);
+        return () => clearInterval(intervalID);
     }, []);
 
     const getProjects = (keys: string[]) => {

@@ -8,13 +8,16 @@ import type { Version } from "../projects";
 import type { VersionUnresolvedIssuesCount } from "../versions";
 
 const ProjectItem: React.FC<{ version: Version }> = ({ version }) => {
+    const [intervalID, setIntervalID] = useState<NodeJS.Timeout>();
     const [issueUnresolved, setIssueUnresolved] = useState<VersionUnresolvedIssuesCount | null>(
         null
     );
 
     useEffect(() => getUnresolved(), []);
     useEffect(() => {
-        setInterval(() => getUnresolved(), 1000 * 60);
+        const id = setInterval(() => getUnresolved(), 1000 * 60);
+        setIntervalID(id);
+        return () => clearInterval(intervalID);
     }, []);
 
     const getUnresolved = () => {
